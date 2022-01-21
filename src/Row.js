@@ -50,7 +50,7 @@ export default function Row(props) {
                         key={col}
                         style={[
                             styles.colItem,
-                            { backgroundColor: isItemInTheWinningPattern({winningPattern, col}) ? 'gold' : 'white'}
+                            { backgroundColor: winningPattern && isItemInTheWinningPattern({winningPattern, col}) ? 'gold' : 'white'}
                         ]}
                     >
                     <TouchableHighlight 

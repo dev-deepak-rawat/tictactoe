@@ -7,13 +7,19 @@
  */
 
 import React, { useState } from 'react';
-import { Button, SafeAreaView, StatusBar, TextInput, View, StyleSheet } from 'react-native';
+import { Button, SafeAreaView, StatusBar, TextInput, View, StyleSheet, Text } from 'react-native';
 import Tictactoe from './Tictactoe';
 
 const App  = () => {
   const [text, setText] = useState('');
   const [size, setSize] = useState(null);
+  const [error, setError] = useState('');
   const handlePress = () => {
+    if(text < 3 || text > 8 ) {
+      setError('Please enter a number between 3 and 8');
+      return;
+    }
+    setError('');
     setText('');
     setSize(+text ? +text : 3);
   }
@@ -23,6 +29,7 @@ const App  = () => {
       <StatusBar barStyle="dark-content" />
       {
         size ? <Tictactoe size={size} setSize={setSize}/> : (
+          <>
           <View style={styles.container}>
             <TextInput
               style={styles.input}
@@ -31,6 +38,8 @@ const App  = () => {
             />
             <Button onPress={handlePress} title="Enter" />
           </View>
+          {error ? <Text style={styles.error}>{error}</Text> : null}
+          </>
         )
       }
     </SafeAreaView>
@@ -44,8 +53,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     margin: 20,
+    marginBottom: 0,
   },
   input: {
     fontSize: 20
+  },
+  error: {
+    fontWeight: '500',
+    color: 'red',
+    marginLeft: 20
   }
 });
