@@ -1,7 +1,7 @@
 import { View, Button, StyleSheet } from 'react-native';
 import React from 'react';
 
-export default function Menus({setHistory, history, setWinningPattern}) {
+export default function Menus({setHistory, history, setWinningPattern, setSize}) {
   const reset = () => {
     setHistory([]);
     setWinningPattern('');
@@ -14,6 +14,7 @@ export default function Menus({setHistory, history, setWinningPattern}) {
     <View style={styles.container}>
         <Button onPress={reset} title="Reset" />
         <Button onPress={undo} title="Undo" />
+        <Button onPress={() => setSize(null)} title="Reset All" />
     </View>
   );
 }

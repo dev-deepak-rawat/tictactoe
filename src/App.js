@@ -7,35 +7,45 @@
  */
 
 import React, { useState } from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
+import { Button, SafeAreaView, StatusBar, TextInput, View, StyleSheet } from 'react-native';
 import Tictactoe from './Tictactoe';
 
-
 const App  = () => {
- 
+  const [text, setText] = useState('');
+  const [size, setSize] = useState(null);
+  const handlePress = () => {
+    setText('');
+    setSize(+text ? +text : 3);
+  }
 
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle="dark-content" />
-      <Tictactoe size={3}/>
+      {
+        size ? <Tictactoe size={size} setSize={setSize}/> : (
+          <View style={styles.container}>
+            <TextInput
+              style={styles.input}
+              onChangeText={setText}
+              placeholder="Enter Game Size"
+            />
+            <Button onPress={handlePress} title="Enter" />
+          </View>
+        )
+      }
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-
-});
-
 export default App;
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 20,
+  },
+  input: {
+    fontSize: 20
+  }
+});

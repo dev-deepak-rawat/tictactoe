@@ -6,7 +6,7 @@ import History from './History';
 import Title from './Title';
 import Menus from './Menus';
 
-export default function Tictactoe({size = 3}) {
+export default function Tictactoe({size, setSize}) {
   const [ history, setHistory] = useState([]);
   const [ winningPattern, setWinningPattern ] = useState('');
   return (
@@ -20,7 +20,7 @@ export default function Tictactoe({size = 3}) {
         />
       ))
     }
-    <Menus {...{setHistory, history, setWinningPattern}} />
+    <Menus {...{setHistory, history, setWinningPattern, setSize}} />
     <History {...{setHistory, history, setWinningPattern}} />
     </View>
   );

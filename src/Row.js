@@ -25,19 +25,19 @@ export default function Row(props) {
       if(! winningPattern) return false;
       if(winningPattern.includes('row')) {
         const winningRow = winningPattern[3];
-        return winningRow === row;
+        return winningRow == row;
       }
   
       if(winningPattern.includes('col')) {
         const winningCol = winningPattern[3];
-        return winningCol === col;
+        return winningCol == col;
       }
   
       if(winningPattern === 'diag1')
-        return col === row;
+        return col == row;
   
         if(winningPattern === 'diag2')
-        return col + row === size - 1;
+        return col + row == size - 1;
     }
   
   

@@ -2,7 +2,7 @@ export const getNSizeArray = (n) => [...Array(n).keys()];
 
 export const isGameDraw = (history, size) => history.length === size * size;
 
-export const countAndCheckForWinner = ({history, size}) => {
+const countAndCheckForWinner = ({history, size}) => {
     let checkObj = {};
     history.forEach(({r, c}) => {
       checkObj[`row${r}`] = (checkObj[`row${r}`] || 0) + 1;
@@ -12,7 +12,7 @@ export const countAndCheckForWinner = ({history, size}) => {
       if ( r+c === size - 1)
         checkObj.diag2 = (checkObj.diag2 || 0) + 1;
     })
-    const [ winningPattern ] = Object.entries(checkObj).find(([key, value]) => value === 3) || [];
+    const [ winningPattern ] = Object.entries(checkObj).find(([key, value]) => value === size) || [];
     return winningPattern;
   }
   
