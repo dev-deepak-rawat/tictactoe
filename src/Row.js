@@ -58,7 +58,7 @@ export default function Row(props) {
                     key={col}
                     disabled={winningPattern || isGameDraw(history, size)}
                   >
-                    <Text style={styles.text}>
+                    <Text style={styles.text} testID={`cell${row}${col}`}>
                         {getInputSign(col)}
                     </Text>
                   </TouchableHighlight>
