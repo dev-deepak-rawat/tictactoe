@@ -12,9 +12,15 @@ export default function Menus({setHistory, history, setWinningPattern, setSize})
   }
   return (
     <View style={styles.container}>
+      <View style={styles.button}>
         <Button onPress={reset} title="Reset" />
-        <Button onPress={undo} title="Undo" />
+      </View>
+      <View style={styles.button}>
+        <Button onPress={undo} title="Undo" testID='undo-button'/>
+      </View>
+      <View style={styles.button}>
         <Button onPress={() => setSize(null)} title="Reset All" />
+      </View>
     </View>
   );
 }
@@ -24,6 +30,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flexDirection: 'row',
   },
+  button: {
+    marginHorizontal: 5
+  }
 });
 
 

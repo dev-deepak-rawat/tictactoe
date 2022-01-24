@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
   },
   text: {
       fontWeight: '500',
-      color: '#333'
+      color: '#333',
+      marginRight: 20
   }
 });
 
