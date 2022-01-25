@@ -5,7 +5,7 @@ import { checkForWin, getNSizeArray, isGameDraw } from './helper';
 export default function Row(props) {
     const { size, row, setHistory, history, setWinningPattern, winningPattern } = props;
   
-    const _onPressButton = (col) => {
+    const handleButtonPress = (col) => {
       if(history.find(({rowIndex,colIndex}) => (rowIndex === row && colIndex === col)))
         return;
       const updatedHistory = [...history, {rowIndex: row, colIndex: col}];
@@ -56,7 +56,7 @@ export default function Row(props) {
                         ]}
                     >
                     <TouchableHighlight 
-                    onPress={() => _onPressButton(col)}
+                    onPress={() => handleButtonPress(col)}
                     key={col}
                     disabled={winningPattern || isGameDraw(history, size)}
                   >

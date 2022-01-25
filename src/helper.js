@@ -60,3 +60,7 @@ export const checkForWin = (history = [], size) => {
       countAndCheckForWinner({history: player2History, size })
     );
   }
+
+const isEvenLengthArray = history => history.length % 2 === 0;
+export const getLastPlayer = history => isEvenLengthArray(history) ? 2 : 1;
+export const getNextPlayer = history => isEvenLengthArray(history) ? 1 : 2;

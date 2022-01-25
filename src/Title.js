@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import { isGameDraw } from './helper';
+import { isGameDraw, getLastPlayer, getNextPlayer } from './helper';
 
 const TitleView = ({title}) => (
     <View style={styles.titleContainer}>
@@ -10,10 +10,10 @@ const TitleView = ({title}) => (
 
 export default function Title({ winningPattern, history, size }) {
     if(winningPattern)
-        return <TitleView title={`Player ${history.length % 2 === 0 ? 2 : 1} Won`} />
+        return <TitleView title={`Player ${getLastPlayer(history)} Won`} />
     if(isGameDraw(history, size))
         return <TitleView title={'Match Draw'}/>
-    return <TitleView title={`Player ${history.length % 2 === 0 ? 1 : 2}'s turn`} />
+    return <TitleView title={`Player ${getNextPlayer(history)}'s turn`} />
 }
 
 const styles = StyleSheet.create({

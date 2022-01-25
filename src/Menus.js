@@ -10,6 +10,7 @@ export default function Menus({setHistory, history, setWinningPattern, setSize})
     setHistory(history.slice(0,-1));
     setWinningPattern('');
   }
+  const resetAll = () => setSize(null);
   return (
     <View style={styles.container}>
       <View style={styles.button}>
@@ -19,7 +20,7 @@ export default function Menus({setHistory, history, setWinningPattern, setSize})
         <Button onPress={undo} title="Undo" testID='undo-button'/>
       </View>
       <View style={styles.button}>
-        <Button onPress={() => setSize(null)} title="Reset All" />
+        <Button onPress={resetAll} title="Reset All" />
       </View>
     </View>
   );
@@ -27,7 +28,7 @@ export default function Menus({setHistory, history, setWinningPattern, setSize})
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    marginTop: 20, 
     flexDirection: 'row',
   },
   button: {

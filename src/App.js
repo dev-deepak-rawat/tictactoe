@@ -7,7 +7,8 @@
  */
 
 import React, { useState } from 'react';
-import { Button, SafeAreaView, StatusBar, TextInput, View, StyleSheet, Text } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet } from 'react-native';
+import SizeInput from './SizeInput';
 import Tictactoe from './Tictactoe';
 
 const App  = () => {
@@ -28,19 +29,15 @@ const App  = () => {
     <SafeAreaView style={styles.safeViewContainer}>
       <StatusBar barStyle="dark-content" />
       {
-        size ? <Tictactoe size={size} setSize={setSize}/> : (
-          <>
-          <View style={styles.container}>
-            <TextInput
-              style={styles.input}
-              onChangeText={setGameSizeInput}
-              placeholder="Enter Game Size"
-            />
-            <Button onPress={handlePress} title="Enter" />
-          </View>
-          {error ? <Text style={styles.error}>{error}</Text> : null}
-          </>
-        )
+        size
+          ? 
+        <Tictactoe size={size} setSize={setSize}/>
+          :
+        <SizeInput
+          error={error}
+          setGameSizeInput={setGameSizeInput}
+          handlePress={handlePress}
+        />
       }
     </SafeAreaView>
   );
@@ -49,21 +46,7 @@ const App  = () => {
 export default App;
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    margin: 20,
-    marginBottom: 0,
-  },
   safeViewContainer: {
     flex: 1
   },
-  input: {
-    fontSize: 20
-  },
-  error: {
-    fontWeight: '500',
-    color: 'red',
-    marginLeft: 20
-  }
 });

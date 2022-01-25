@@ -10,14 +10,12 @@ export default function History(props) {
   return (
     <ScrollView style={styles.container}>
         <Text style={styles.title} >History</Text>
-      {history.map((historyItem, index) => (
-        <View key={JSON.stringify(historyItem)} style={styles.item}>
-            <Text style={styles.text}>
-                {`Player ${index % 2 === 0 ? 1 : 2}'s move {${historyItem.rowIndex},${historyItem.colIndex}}`}
-            </Text>
-            <Button onPress={() => undoMove(index)} title="Undo" />
-        </View>
-      ))}
+        {history.map(({rowIndex, colIndex}, index) => (
+          <HistoryView 
+            key={`${rowIndex}${colIndex}`}
+            {...{rowIndex, colIndex, index, undoMove }}
+          />
+        ))}
     </ScrollView>
   );
 }
@@ -40,4 +38,13 @@ const styles = StyleSheet.create({
       marginRight: 20
   }
 });
+
+const HistoryView = ({rowIndex, colIndex, index}) => (
+  <View style={styles.item}>
+      <Text style={styles.text}>
+          {`Player ${index % 2 === 0 ? 1 : 2}'s move {${rowIndex},${colIndex}}`}
+      </Text>
+      <Button onPress={() => undoMove(index)} title="Undo" />
+  </View>
+)
 
