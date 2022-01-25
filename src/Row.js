@@ -6,9 +6,9 @@ export default function Row(props) {
     const { size, row, setHistory, history, setWinningPattern, winningPattern } = props;
   
     const _onPressButton = (col) => {
-      if(history.find(({r,c}) => (r === row && c === col)))
+      if(history.find(({rowIndex,colIndex}) => (rowIndex === row && colIndex === col)))
         return;
-      const updatedHistory = [...history, {r: row, c: col}];
+      const updatedHistory = [...history, {rowIndex: row, colIndex: col}];
       setHistory(updatedHistory);
       const winningPattern = checkForWin(updatedHistory, size);
       if(winningPattern)
@@ -16,7 +16,9 @@ export default function Row(props) {
     }
   
     const getInputSign = (col) => {
-      const currHistoryItemIndex = history.findIndex( ({r, c}) => (r === row && c === col) );
+      const currHistoryItemIndex = history.findIndex( 
+        ({rowIndex, colIndex}) => (rowIndex === row && colIndex === col)
+      );
       if (currHistoryItemIndex < 0) return ' ';
       return currHistoryItemIndex % 2 === 0 ? 'O' : 'X';
     }

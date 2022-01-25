@@ -11,21 +11,21 @@ import { Button, SafeAreaView, StatusBar, TextInput, View, StyleSheet, Text } fr
 import Tictactoe from './Tictactoe';
 
 const App  = () => {
-  const [text, setText] = useState('');
+  const [gameSizeInput, setGameSizeInput] = useState('');
   const [size, setSize] = useState(null);
   const [error, setError] = useState('');
   const handlePress = () => {
-    if(text < 3 || text > 8 ) {
+    if(gameSizeInput < 3 || gameSizeInput > 8 ) {
       setError('Please enter a number between 3 and 8');
       return;
     }
     setError('');
-    setText('');
-    setSize(+text ? +text : 3);
+    setGameSizeInput('');
+    setSize(+gameSizeInput ? +gameSizeInput : 3);
   }
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.safeViewContainer}>
       <StatusBar barStyle="dark-content" />
       {
         size ? <Tictactoe size={size} setSize={setSize}/> : (
@@ -33,7 +33,7 @@ const App  = () => {
           <View style={styles.container}>
             <TextInput
               style={styles.input}
-              onChangeText={setText}
+              onChangeText={setGameSizeInput}
               placeholder="Enter Game Size"
             />
             <Button onPress={handlePress} title="Enter" />
@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 20,
     marginBottom: 0,
+  },
+  safeViewContainer: {
+    flex: 1
   },
   input: {
     fontSize: 20

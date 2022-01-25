@@ -1,5 +1,5 @@
-import { View, Text, ScrollView, Button, StyleSheet } from 'react-native';
 import React from 'react';
+import { View, Text, ScrollView, Button, StyleSheet } from 'react-native';
 
 export default function History(props) {
     const { history, setHistory, setWinningPattern } = props;
@@ -13,7 +13,7 @@ export default function History(props) {
       {history.map((historyItem, index) => (
         <View key={JSON.stringify(historyItem)} style={styles.item}>
             <Text style={styles.text}>
-                {`Player ${index % 2 === 0 ? 1 : 2}'s move {${historyItem.r},${historyItem.c}}`}
+                {`Player ${index % 2 === 0 ? 1 : 2}'s move {${historyItem.rowIndex},${historyItem.colIndex}}`}
             </Text>
             <Button onPress={() => undoMove(index)} title="Undo" />
         </View>
