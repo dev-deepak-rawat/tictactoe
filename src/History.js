@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const HistoryView = ({rowIndex, colIndex, index}) => (
+const HistoryView = ({rowIndex, colIndex, index, undoMove}) => (
   <View style={styles.item}>
       <Text style={styles.text}>
           {`Player ${index % 2 === 0 ? 1 : 2}'s move {${rowIndex},${colIndex}}`}
