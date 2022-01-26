@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import App from '../App';
+import App from '../components/App';
 
 describe('App integration testing', () => {
 

@@ -1,16 +1,19 @@
-import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import React from 'react';
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import { useGameSize, useHistory, useWinningPattern } from '../hooks';
 import { checkForWin, getNSizeArray, isGameDraw } from './helper';
 
-export default function Row(props) {
-    const { size, row, setHistory, history, setWinningPattern, winningPattern } = props;
-  
+export default function Row({row}) {
+    const { history, setHistory } = useHistory();
+    const { winningPattern, setWinningPattern } = useWinningPattern();
+    const { gameSize } = useGameSize();
+    
     const handleButtonPress = (col) => {
       if(history.find(({rowIndex,colIndex}) => (rowIndex === row && colIndex === col)))
         return;
       const updatedHistory = [...history, {rowIndex: row, colIndex: col}];
       setHistory(updatedHistory);
-      const winningPattern = checkForWin(updatedHistory, size);
+      const winningPattern = checkForWin(updatedHistory, gameSize);
       if(winningPattern)
         setWinningPattern(winningPattern);
     }
@@ -39,14 +42,14 @@ export default function Row(props) {
         return col == row;
   
         if(winningPattern === 'diag2')
-        return col + row == size - 1;
+        return col + row == gameSize - 1;
     }
   
   
     return (
         <View style={styles.row}>
             {
-                getNSizeArray(size).map(col => (
+                getNSizeArray(gameSize).map(col => (
                   
                     <View 
                         key={col}
@@ -58,7 +61,7 @@ export default function Row(props) {
                     <TouchableHighlight 
                     onPress={() => handleButtonPress(col)}
                     key={col}
-                    disabled={winningPattern || isGameDraw(history, size)}
+                    disabled={winningPattern || isGameDraw(history, gameSize)}
                   >
                     <Text style={styles.text} testID={`cell${row}${col}`}>
                         {getInputSign(col)}

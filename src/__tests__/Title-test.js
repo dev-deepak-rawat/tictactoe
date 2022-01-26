@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react-native';
-import Title from '../Title';
+import Title from '../components/Title';
 
 describe('Test Game titles', () => {
     it("At first screen should show Player 1's turn", () => {

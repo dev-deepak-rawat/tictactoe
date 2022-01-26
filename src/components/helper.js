@@ -1,17 +1,17 @@
 export const getNSizeArray = (n) => [...Array(n).keys()];
 
-export const isGameDraw = (history, size) => history.length === size * size;
+export const isGameDraw = (history, gameSize) => history.length === gameSize * gameSize;
 
 /**
  * @param {Array} history history  [{rowIndex:0, colIndex: 0}]
- * @param {Int} size size of the tic tac toe game e.g. 3
+ * @param {Int} gameSize gameSize of the tic tac toe game e.g. 3
  * @returns {String | undefined } winningPattern if any
  * row0 if row 0 win
  * col1 if col 1 win
  * diag1 if win by primary diagonal
  * diag2 if win by secondary diagonal
  */
-const countAndCheckForWinner = ({history, size}) => {
+const countAndCheckForWinner = ({history, gameSize}) => {
     /* Syntax
       checkObj = {
         row0: 1,
@@ -31,21 +31,21 @@ const countAndCheckForWinner = ({history, size}) => {
         checkObj.diag1 = (checkObj.diag1 || 0) + 1;
       
       //condition for secondary diagonal
-      if ( rowIndex+colIndex === size - 1)
+      if ( rowIndex+colIndex === gameSize - 1)
         checkObj.diag2 = (checkObj.diag2 || 0) + 1;
     })
-    //based on size and checkObj, get the winning pattern
-    const [ winningPattern ] = Object.entries(checkObj).find(([key, value]) => value === size) || [];
+    //based on gameSize and checkObj, get the winning pattern
+    const [ winningPattern ] = Object.entries(checkObj).find(([key, value]) => value === gameSize) || [];
     return winningPattern;
   }
 
   /**
    * divide history by player1 history & player2 history
    * @param {Array} history 
-   * @param {Int} size 
+   * @param {Int} gameSize 
    * @returns {String | undefined} Winning pattern if any
    */
-export const checkForWin = (history = [], size) => {
+export const checkForWin = (history = [], gameSize) => {
     let player1History = [];
     let player2History = [];
     history.forEach((historyItem, index) => {
@@ -55,9 +55,9 @@ export const checkForWin = (history = [], size) => {
         player2History.push(historyItem);
     })
     return (
-      countAndCheckForWinner({history: player1History, size })
+      countAndCheckForWinner({history: player1History, gameSize })
       ||
-      countAndCheckForWinner({history: player2History, size })
+      countAndCheckForWinner({history: player2History, gameSize })
     );
   }
 

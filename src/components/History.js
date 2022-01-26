@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, Text, ScrollView, Button, StyleSheet } from 'react-native';
+import { useHistory, useWinningPattern } from '../hooks';
 
-export default function History(props) {
-    const { history, setHistory, setWinningPattern } = props;
+export default function History() {
+    const { history, setHistory } = useHistory();
+    const { setWinningPattern } = useWinningPattern();
+
     const undoMove = historyIndex => {
         setHistory(history.slice(0, historyIndex));
         setWinningPattern('');

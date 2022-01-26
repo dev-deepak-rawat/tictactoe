@@ -1,16 +1,28 @@
 import { View, Button, StyleSheet } from 'react-native';
 import React from 'react';
+import { useGameSize, useHistory, useWinningPattern } from '../hooks';
 
-export default function Menus({setHistory, history, setWinningPattern, setSize}) {
+export default function Menus({ navigation}) {
+  const { history, setHistory } = useHistory();
+  const { setWinningPattern } = useWinningPattern();
+  const { setGameSize } = useGameSize();
+  
   const reset = () => {
+    console.log({history, setWinningPattern})
     setHistory([]);
     setWinningPattern('');
   }
+
   const undo = () => {
     setHistory(history.slice(0,-1));
     setWinningPattern('');
   }
-  const resetAll = () => setSize(null);
+
+  const resetAll = () => {
+    setGameSize(null);
+    navigation.navigate('Home');
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.button}>
