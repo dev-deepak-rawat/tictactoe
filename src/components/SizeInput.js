@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native';
 import { useDispatch } from 'react-redux';
 import constants from '../constants';
@@ -7,6 +7,7 @@ import { useGameSize } from '../hooks';
 export default function SizeInput({ navigation }) {
   const [error, setError] = useState('');
   const [gameSizeInput, setGameSizeInput] = useState('');
+  const { gameSize } = useGameSize();
   const { setGameSize } = useGameSize();
   const dispatch = useDispatch();
   
@@ -19,8 +20,12 @@ export default function SizeInput({ navigation }) {
     setGameSizeInput('');
     setGameSize(+gameSizeInput ? +gameSizeInput : 3);
     dispatch({type: constants.START_NEW_GAME});
-    navigation.navigate('Game');
   }
+
+  useEffect(() => {
+    if(gameSize)
+      navigation.navigate('Game');
+  }, [gameSize])
 
   return (
     <View style={styles.container}>
