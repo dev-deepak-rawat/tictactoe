@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { isEvenLengthArray } from "./components/helper";
 import constants from "./constants";
 
 export const useHistory = () => {
@@ -8,7 +9,15 @@ export const useHistory = () => {
         type: constants.SET_HISTORY,
         payload: newHistory
     });
-    return { history, setHistory };
+    const getLastPlayer = () => isEvenLengthArray(history) ? 2 : 1;
+    const getNextPlayer = () => isEvenLengthArray(history) ? 1 : 2;
+    
+    return { 
+        history,
+        setHistory,
+        getLastPlayer,
+        getNextPlayer
+    };
 }
 
 export const useWinningPattern = () => {

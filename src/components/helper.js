@@ -61,6 +61,4 @@ export const checkForWin = (history = [], gameSize) => {
     );
   }
 
-const isEvenLengthArray = history => history.length % 2 === 0;
-export const getLastPlayer = history => isEvenLengthArray(history) ? 2 : 1;
-export const getNextPlayer = history => isEvenLengthArray(history) ? 1 : 2;
+export const isEvenLengthArray = arr => arr.length % 2 === 0;

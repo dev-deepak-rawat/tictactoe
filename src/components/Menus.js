@@ -8,7 +8,6 @@ export default function Menus({ navigation}) {
   const { setGameSize } = useGameSize();
   
   const reset = () => {
-    console.log({history, setWinningPattern})
     setHistory([]);
     setWinningPattern('');
   }
